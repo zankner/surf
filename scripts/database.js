@@ -39,7 +39,12 @@ class Database {
   }
 
    //Generate a chat
-  static genChat(creatorId, chatName, chatId, invitedUsers){
+  static genChat(chatClass, chatId){
+
+    var chat = chatClass.serialize();
+    var creatorId = chat.creator;
+    var invitedUsers = chat.invitedUsers;
+    var chatName = chat.name;
 
     var creatorRef = firebase.database().ref('users/' + creatorId + '/chats/' + chatId)
     creatorRef.set({
@@ -61,7 +66,8 @@ class Database {
     chatRef.set({
       creator: creatorId,
       numMembers: invitedUsers.length + 1,
-      members: chatMembers
+      members: chatMembers,
+      name: chatName
     })
 
   }
