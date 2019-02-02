@@ -1,20 +1,23 @@
 class Database {
 
   //Add a message to the database
-  static addMessage(message, universal, id){
+  static addMessage(message, universal, id, domainId){
+    console.log(universal)
     if(universal){
-      const ref = firebase.database().ref('domains/' + domainId + '/chats/' + id + '/messages/' + message.id);
+      console.log('hello')
+      var ref = firebase.database().ref('domains/' + domainId + '/chats/' + id + '/messages/' + message.id);
     }
     else{
-      const ref = firebase.database().ref('domains/' + domainId + '/chats/' + id + '/messages/' + message.id);
+      console.log('hello')
+      var ref = firebase.database().ref('domains/' + domainId + '/chats/' + id + '/messages/' + message.id);
     }
     ref.set(message.serialize);
   }
 
   //Send a friend request
-  static friendRequest(sendingUser, receivingUser){
-    const sendingRef = firebase.database().ref('users/' + sendingUser.id + '/friends/' + receivingUser.id);
-    const reveingRef = firebase.database().ref('users/' + receivingUser.id + '/friends/' + sendingUser.id);
+  static friendRequest(sendingUserId, receivingUserId){
+    var sendingRef = firebase.database().ref('users/' + sendingUserId + '/friends/' + receivingUserId);
+    var reveingRef = firebase.database().ref('users/' + receivingUserId + '/friends/' + sendingUserId);
     sendingRef.set({
       status: 'requested'
     });
@@ -24,9 +27,9 @@ class Database {
   }
 
   //Accept a friend request
-  static acceptRequest(pendingUser, acceptingUser){
-    const pendingRef = firebase.database().ref('users/' + pendingUser.id + '/friends/' + acceptingUser.id);
-    const acceptingRef = firebase.database().ref('users/' + acceptingUser.id + '/friends/' + pendingUser.id);
+  static acceptRequest(pendingUserId, acceptingUserId){
+    var pendingRef = firebase.database().ref('users/' + pendingUserId + '/friends/' + acceptingUserId);
+    var acceptingRef = firebase.database().ref('users/' + acceptingUserId + '/friends/' + pendingUserId);
     pendingRef.set({
       status: 'accepted'
     });
