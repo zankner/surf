@@ -1,15 +1,15 @@
 class Database {
 
   //Add a message to the database
-  static addMessage(message, universal, id, domainId){
+  static addMessage(message, universal, chatId, domainId){
     console.log(universal)
     if(universal){
       console.log('hello')
-      var ref = firebase.database().ref('domains/' + domainId + '/chats/' + id + '/messages/' + message.id);
+      var ref = firebase.database().ref('domains/' + domainId + '/chats/' + chatId + '/messages/' + message.id);
     }
     else{
       console.log('hello')
-      var ref = firebase.database().ref('domains/' + domainId + '/chats/' + id + '/messages/' + message.id);
+      var ref = firebase.database().ref('domains/' + domainId + '/chats/' + chatId + '/messages/' + message.id);
     }
     ref.set(message.serialize);
   }
@@ -38,4 +38,31 @@ class Database {
     });
   }
 
-}
+   //Generate a chat
+  static genChat(creatorId, chatName, chatId, invitedUsers){
+
+    var creatorRef = firebase.database().ref('users/' + creatorId + '/chats/' + chatId)
+    creatorRef.set({
+      status: 'creator'
+    });
+
+    var chatMembers = {};
+
+    for(var i = 0; i<invitedUsers.length; i+=1){
+      chatMembers[invitedUsers[i]]= {status: 'pending'}
+      var invitedRef = firebase.database().ref('users/' + invitedUsers[i] + '/chats/' + chatId)
+      invitedRef.set({
+        status: 'pending'
+      });
+    }
+
+    var chatRef = firebase.database().ref('chats/' + chatId);
+
+    chatRef.set({
+      creator: creatorId,
+      members: chatMembers,
+    })
+
+  }
+
+ }
