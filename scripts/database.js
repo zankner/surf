@@ -23,4 +23,16 @@ class Database {
     });
   }
 
+  //Accept a friend request
+  static acceptRequest(pendingUser, acceptingUser){
+    const pendingRef = firebase.database().ref('users/' + pendingUser.id + '/friends/' + acceptingUser.id);
+    const acceptingRef = firebase.database().ref('users/' + acceptingUser.id + '/friends/' + pendingUser.id);
+    pendingRef.set({
+      status: 'accepted'
+    });
+    acceptingRef.set({
+      status: 'accepted'
+    });
+  }
+
 }
