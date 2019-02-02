@@ -39,7 +39,7 @@ class Database {
   }
 
    //Generate a chat
-  static genChat(chatClass, chatId){
+  static addChat(chatClass, chatId){
 
     var chat = chatClass.serialize();
     var creatorId = chat.creator;
@@ -73,12 +73,20 @@ class Database {
   }
 
   //Generate a report
-  static genReport(reportClass, reportId){
+  static addReport(reportClass, reportId){
 
     var reportRef = firebase.database().ref('reports/' + reportId);
 
     reportRef.set(reportClass.serialize());
 
+  }
+
+  //Get all of the reports
+  static getReports(callback){
+    var ref = firebase.database().ref('reports');
+    ref.on('value', function(snapshot) {
+      callback(snapshot.val())
+    })
   }
 
  }
