@@ -11,4 +11,16 @@ class Database {
     ref.set(message.serialize);
   }
 
+  //Send a friend request
+  static friendRequest(sendingUser, receivingUser){
+    const sendingRef = firebase.database().ref('users/' + sendingUser.id + '/friends/' + receivingUser.id);
+    const reveingRef = firebase.database().ref('users/' + receivingUser.id + '/friends/' + sendingUser.id);
+    sendingRef.set({
+      status: 'requested'
+    });
+    reveingRef.set({
+      status: 'pending'
+    });
+  }
+
 }
