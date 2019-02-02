@@ -2,7 +2,7 @@
   "name": "Surf",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "Chat anywhere.",
+  "description": "Chat Anywhere",
   "content_security_policy": "script-src 'self' https://www.gstatic.com https://cdn.firebase.com https://*.firebaseio.com; object-src 'self'",
   "icons": {
     "16": "images/icon-16.png",
@@ -18,24 +18,12 @@
     "*://*/*",
     "storage"
   ],
-  "content_scripts": [
-    {
-      "matches": [
-        "*://*/*"
-      ],
-      "js": [
-        "scripts/content.js"
-      ],
-      "run_at": "document_end",
-      "all_frames": false
-    }
-  ],
   "browser_action": {
     "default_icon": {
       "19": "images/icon-19.png",
       "38": "images/icon-38.png"
     },
     "default_title": "Surf",
-    "default_popup": "popup.html"
+    "default_popup": "sign_up.html"
   }
 }
