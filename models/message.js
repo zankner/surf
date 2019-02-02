@@ -9,7 +9,7 @@ class Message{
     return {
       messageContent: this.messageContent,
       sender: this.sender
-    };
+    }
   }
 
 }
