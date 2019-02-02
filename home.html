@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<title>Surf</title>
+
+		<script src="scripts/jquery.min.js"></script>
+		<script src="scripts/bootstrap.min.js"></script>
+
+		<link href="styles/bootstrap.min.css" type="text/css" rel="stylesheet">
+		<link href="styles/main.css" type="text/css" rel="stylesheet">
+	</head>
+	<body>
+
+		<!-- Navigation -->
+		<nav class="navbar navbar-dark bg-dark">
+			<a class="navbar-brand" href="#">Surf</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-item nav-link active" href="#">Domain <span class="sr-only">(current)</span></a>
+					<a class="nav-item nav-link" href="#">Page</a>
+					<a class="nav-item nav-link" href="#">Friends</a>
+				</div>
+			</div>
+		</nav>
+
+		<div id="messageContainer" class="pre-scrollable border-left message-container">
+			<div class="message-group">
+				<h6>ben</h6>
+				<p>Hello, Zack!</p>
+			</div>
+			<!--<div class="message-group">-->
+				<!--<h6>George</h6>-->
+				<!--<p>Hello, Ben</p>-->
+				<!--<p>I hope your evening is going well. I'm writing to let you know that I don't like you at all.</p>-->
+			<!--</div>-->
+			<!--<div class="message-group">-->
+				<!--<h6>Ben</h6>-->
+				<!--<p>Well I'll tell you this much, that's a damn shame.</p>-->
+				<!--<p>I mean, I don't know what I did wrong!</p>-->
+				<!--<p>I worked so hard.</p>-->
+				<!--<p>Can you give me a reason?</p>-->
+			<!--</div>-->
+			<!--<div class="message-group">-->
+				<!--<h6>George</h6>-->
+				<!--<p>Not at the moment, no.</p>-->
+				<!--<p>All I have to say is fuck you and everyone who looks like you.</p>-->
+			<!--</div>-->
+			<!--<div class="message-group">-->
+				<!--<h6>Ben</h6>-->
+				<!--<p>Ok, fine then.</p>-->
+				<!--<p>I'm gonna go make some goddamn guacamole.</p>-->
+				<!--<p>Later bro.</p>-->
+			<!--</div>-->
+			<!--<div class="message-group">-->
+				<!--<h6>Zack</h6>-->
+				<!--<p>Bye</p>-->
+			<!--</div>-->
+		</div>
+		<form id="sendMessage" method="post" autocomplete="off" class="send-message">
+			<div class='input-group'>
+				<input type='text' name='message' class="form-control" placeholder="Type your message...">
+				<div class='input-group-append'>
+					<button class='btn btn-primary'>Send</button>
+				</div>
+			</div>
+		</form>
+
+		<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+		<script src="scripts/html_actuator.js"></script>
+		<script src="scripts/home.js"></script>
+	</body>
+</html>

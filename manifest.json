@@ -24,6 +24,6 @@
       "38": "images/icon-38.png"
     },
     "default_title": "Surf",
-    "default_popup": "sign_up.html"
+    "default_popup": "home.html"
   }
 }
