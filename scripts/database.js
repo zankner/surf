@@ -72,4 +72,13 @@ class Database {
 
   }
 
+  //Generate a report
+  static genReport(reportClass, reportId){
+
+    var reportRef = firebase.database().ref('reports/' + reportId);
+
+    reportRef.set(reportClass.serialize());
+
+  }
+
  }
