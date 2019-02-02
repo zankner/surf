@@ -60,7 +60,8 @@ class Database {
 
     chatRef.set({
       creator: creatorId,
-      members: chatMembers,
+      numMembers: invitedUsers.length + 1,
+      members: chatMembers
     })
 
   }
