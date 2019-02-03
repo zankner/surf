@@ -19,14 +19,19 @@ class HTMLService {
 		const newTopicDiv = $('<a href="#"></a>').addClass('list-group-item list-group-item-action');
 		newTopicDiv.attr('id', id);
 		newTopicDiv.text(title);
-		topicsContainer.append(newTopicDiv)
+		topicsContainer.append(newTopicDiv);
+
+		topicsContainer.scrollTop(topicsContainer[0].scrollHeight);
 	}
 
 	static addComment(displayName, content) {
+		const topicContainer = $('#topicContainer');
 		const newCommentDiv = $('<div></div>').addClass('comment-group');
 		newCommentDiv.append($('<h6></h6>').text(displayName));
 		newCommentDiv.append($('<p></p>').text(content));
-		$('#topicContainer').append(newCommentDiv);
+		topicContainer.append(newCommentDiv);
+
+		topicContainer.scrollTop(topicContainer[0].scrollHeight);
 	}
 
 	static showChat() {
@@ -54,6 +59,5 @@ class HTMLService {
 
 		$('');
 		$('#topicTitle').text(title);
-
 	}
 }

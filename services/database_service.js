@@ -30,7 +30,7 @@ class DatabaseService {
 	static getMessageStream(url, callback) {
 		const encodedDomain = encodeURIComponent(url.hostname).replace(/\./g, '%2E');
 		const encodedPath = encodeURIComponent(url.pathname).replace(/\./g, '%2E');
-		const ref = firebase.database().ref('domains/' + encodedDomain + '/pages/' + encodedPath + '/messages');
+		const ref = firebase.database().ref('domains/' + encodedDomain + '/pages/' + encodedPath + '/messages').orderByChild('timestamp');
 
 		ref.on('child_added', callback);
 	}
@@ -39,7 +39,7 @@ class DatabaseService {
 	static getCommentStream(url, topicId, callback) {
 		const encodedDomain = encodeURIComponent(url.hostname).replace(/\./g, '%2E');
 		const encodedPath = encodeURIComponent(url.pathname).replace(/\./g, '%2E');
-		const ref = firebase.database().ref('domains/' + encodedDomain + '/pages/' + encodedPath + '/topics/' + topicId + '/comments');
+		const ref = firebase.database().ref('domains/' + encodedDomain + '/pages/' + encodedPath + '/topics/' + topicId + '/comments').orderByChild('timestamp');
 
 		ref.on('child_added', callback);
 	}
@@ -56,7 +56,7 @@ class DatabaseService {
 	static getTopicStream(url, callback) {
 		const encodedDomain = encodeURIComponent(url.hostname).replace(/\./g, '%2E');
 		const encodedPath = encodeURIComponent(url.pathname).replace(/\./g, '%2E');
-		const ref = firebase.database().ref('domains/' + encodedDomain + '/pages/' + encodedPath + '/topics');
+		const ref = firebase.database().ref('domains/' + encodedDomain + '/pages/' + encodedPath + '/topics').orderByChild('timestamp');
 
 		ref.on('child_added', callback);
 	}
