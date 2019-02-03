@@ -1,5 +1,7 @@
-class HTMLActuator {
+class HTMLService {
 	static addMessage(sender, message) {
+
+		const messageContainer = $('#messageContainer');
 		if ($('#messageContainer div h6:last').text() === sender) {
 			const newMessageText = $('<p></p>').text(message);
 			$('#messageContainer div p:last').append(newMessageText);
@@ -7,7 +9,9 @@ class HTMLActuator {
 			const newMessageDiv = $('<div></div>').addClass('message-group');
 			newMessageDiv.append($('<h6></h6>').text(sender));
 			newMessageDiv.append($('<p></p>').text(message));
-			$('#messageContainer').append(newMessageDiv);
+			messageContainer.append(newMessageDiv);
 		}
+
+		messageContainer.scrollTop(messageContainer[0].scrollHeight);
 	}
 }

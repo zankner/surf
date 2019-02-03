@@ -13,36 +13,36 @@
 	</head>
 	<body>
 
-		<!-- Navigation -->
+		<!--Navigation -->
 		<nav class="navbar navbar-dark bg-dark">
 			<a class="navbar-brand" href="#">Surf</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-				<div class="navbar-nav">
-					<a class="nav-item nav-link active" href="#">Domain <span class="sr-only">(current)</span></a>
-					<a class="nav-item nav-link" href="#">Page</a>
-					<a class="nav-item nav-link" href="#">Friends</a>
+			<form class="form-inline" autocomplete="off" id="setNickname">
+				<div class="input-group">
+					<input type="text" class="form-control" placeholder="Nickname" name="nickname">
+					<div class="input-group-append">
+						<button type="submit" class="btn btn-primary">Set</button>
+					</div>
 				</div>
-			</div>
+			</form>
 		</nav>
 
+		<!--Main content-->
 		<div id="messageContainer" class="pre-scrollable border-left message-container">
 		</div>
 		<form id="sendMessage" method="post" autocomplete="off" class="send-message">
-			<div class='input-group'>
-				<input type='text' name='message' class="form-control" placeholder="Type your message...">
-				<div class='input-group-append'>
-					<button class='btn btn-primary'>Send</button>
+			<div class="input-group">
+				<input type="text" name="message" class="form-control" placeholder="Type your message...">
+				<div class="input-group-append">
+					<button class="btn btn-primary">Send</button>
 				</div>
 			</div>
 		</form>
 
+		<!--JavaScripts-->
 		<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
 		<script src="models/message.js"></script>
-		<script src="services/html_actuator.js"></script>
-		<script src="services/database.js"></script>
+		<script src="services/html_service.js"></script>
+		<script src="services/database_service.js"></script>
 		<script src="scripts/home.js"></script>
 	</body>
 </html>

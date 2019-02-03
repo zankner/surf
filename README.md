@@ -8,7 +8,7 @@
 - Domain
 
 #### Services
-- Database
+- Database_service
 - Authentication
 - HTML Actuator
 
