@@ -2,13 +2,10 @@ class Database {
 
   //Add a message to the database
   static addMessage(message, universal, chatId, domainId){
-    console.log(universal)
     if(universal){
-      console.log('hello')
       var ref = firebase.database().ref('domains/' + domainId + '/pages/' + chatId + '/messages/' + message.id);
     }
     else{
-      console.log('hello')
       var ref = firebase.database().ref('domains/' + domainId + '/chats/' + chatId + '/messages/' + message.id);
     }
     ref.set(message.serialize);
@@ -111,6 +108,20 @@ class Database {
         ref.child('downvotes').set(snapshot.val().downvotes +=1);
       }
       ref.child('totalVotes').set(snapshot.val().totalVotes += 1);
+    });
+  }
+
+  //Search for your content
+  static search(content, pageId, domainId, callback){
+    const ref = firebase.database().ref('domains/' + domainId + '/pages/' + pageId + '/forums');
+    ref.once('value').then(function(snapshot){
+      let similar = [];
+      for(let element in snapshot.val()){
+        if((snapshot.val()[element].topic.focus.includes(content)) || (content.includes(snapshot.val()[element].topic.focus))){
+          similar.push(element)
+        }
+      };
+      callback(similar)
     });
   }
 
