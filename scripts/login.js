@@ -16,7 +16,9 @@ $('#login').click(() => {
 		const user = result.user;
 
 		chrome.storage.sync.set({
-			name: user.displayName
+			displayName: user.displayName,
+			uid: user.uid,
+			email: user.email
 		});
 
 		chrome.browserAction.setPopup({

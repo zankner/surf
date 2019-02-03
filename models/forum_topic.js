@@ -1,5 +1,4 @@
 class ForumTopic {
-
 	constructor(sender, timestamp, focus, content, topicTags, forumTitle, pageId, domainId) {
 		this.id = sender + timestamp.toString();
 		this.sender = data.sender;

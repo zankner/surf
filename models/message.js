@@ -1,17 +1,19 @@
 class Message {
-	constructor(sender, content, timestamp) {
-		this.id = sender + timestamp.toString();
-		this.timestamp = timestamp;
-		this.sender = sender;
+	constructor(uid, displayName, content, timestamp) {
+		this.id = timestamp.toString() + uid;
+		this.uid = uid;
+		this.displayName = displayName;
 		this.content = content;
+		this.timestamp = timestamp;
 	}
 
 	serialize() {
 		return {
 			id: this.id,
-			timestamp: this.timestamp,
-			sender: this.sender,
-			content: this.content
+			uid: this.uid,
+			displayName: this.displayName,
+			content: this.content,
+			timestamp: this.timestamp
 		};
 	}
 }
