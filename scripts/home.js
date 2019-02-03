@@ -8,12 +8,11 @@ firebase.initializeApp({
 	messagingSenderId: '903716384912'
 });
 
-// Set nickname on page load
-let nickname;
+// Set name on page load
+let name;
 chrome.storage.sync.get((results) => {
-	if (results['nickname']) {
-		nickname = results['nickname'];
-		$('#setNickname [name="nickname"]').attr('placeholder', `Nickname: ${nickname}`)
+	if (results['name']) {
+		name = results['name'];
 	}
 });
 
@@ -21,13 +20,13 @@ chrome.storage.sync.get((results) => {
 $('#sendMessage').submit((e) => {
 	e.preventDefault();
 
-	if (!nickname) {
-		alert('You must set a nickname before you can send a message.');
+	if (!name) {
+		alert('You must set a name before you can send a message.');
 		return
 	}
 
 	const date = new Date();
-	const message = new Message(nickname, $('#sendMessage [name="message"]').val(), date.getTime());
+	const message = new Message(name, $('#sendMessage [name="message"]').val(), date.getTime());
 
 	chrome.tabs.getSelected((tab) => {
 		DatabaseService.addMessage(message, new URL(tab.url))
@@ -44,14 +43,12 @@ chrome.tabs.getSelected((tab) => {
 	})
 });
 
-// Set nickname
-$('#setNickname').submit((e) => {
-	e.preventDefault();
-
-	const nicknameInput = $('#setNickname [name="nickname"]');
-	nickname = nicknameInput.val();
-	nicknameInput.attr('placeholder', `Nickname: ${nickname}`);
-	nicknameInput.val('');
-
-	chrome.storage.sync.set({nickname: nickname})
+// Log out
+$('#logout').click(() => {
+	firebase.auth().signOut().then(function() {
+		window.location.href = 'login.html';
+		chrome.browserAction.setPopup({
+			popup: 'login.html'
+		})
+	})
 });

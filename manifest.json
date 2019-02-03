@@ -1,9 +1,9 @@
 {
   "name": "Surf",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "manifest_version": 2,
   "description": "Chat online, anywhere.",
-  "content_security_policy": "script-src 'self' https://www.gstatic.com https://cdn.firebase.com https://*.firebaseio.com; object-src 'self'",
+  "content_security_policy": "script-src 'self' https://apis.google.com https://www.gstatic.com https://cdn.firebase.com https://*.firebaseio.com; object-src 'self'",
   "icons": {
     "16": "images/icon-16.png",
     "128": "images/icon-128.png"
@@ -18,6 +18,6 @@
       "38": "images/icon-38.png"
     },
     "default_title": "Surf",
-    "default_popup": "home.html"
+    "default_popup": "login.html"
   }
 }

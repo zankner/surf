@@ -13,17 +13,20 @@
 	</head>
 	<body>
 
-		<!--Navigation -->
-		<nav class="navbar navbar-dark bg-dark">
+		<!--Navigation-->
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<a class="navbar-brand" href="#">Surf</a>
-			<form class="form-inline" autocomplete="off" id="setNickname">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Nickname" name="nickname">
-					<div class="input-group-append">
-						<button type="submit" class="btn btn-primary">Set</button>
-					</div>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+							aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+					<a class="nav-item nav-link" href="#">Forums</a>
+					<a class="nav-item nav-link" href="#" id="logout">Logout</a>
 				</div>
-			</form>
+			</div>
 		</nav>
 
 		<!--Main content-->
