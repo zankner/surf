@@ -15,27 +15,36 @@ class HTMLService {
 	}
 
 	static addTopic(id, title) {
-		const topicsContainer = $('#forumsContainer');
-		const newTopicDiv = $('<a href="#"></a>').addClass('list-group-item list-group-item-action')
+		const topicsContainer = $('#topicsContainer');
+		const newTopicDiv = $('<a href="#"></a>').addClass('list-group-item list-group-item-action');
+		newTopicDiv.attr('id', id);
+		newTopicDiv.text(title);
 		topicsContainer.append(newTopicDiv)
 	}
 
 	static showChat() {
 		$('#chat').show();
 		$('#topics').hide();
-		$('#forum').hide();
+		$('#topic').hide();
 
 		$('#homeLink').addClass('active');
-		$('#forumsLink').removeClass('active')
-
+		$('#topicsLink').removeClass('active');
 	}
 
 	static showTopics() {
 		$('#chat').hide();
 		$('#topics').show();
-		$('#forum').hide();
+		$('#topic').hide();
 
 		$('#homeLink').removeClass('active');
-		$('#forumsLink').addClass('active')
+		$('#topicsLink').addClass('active');
+	}
+
+	static displayTopic(title, comments) {
+		$('#chat').hide();
+		$('#topics').hide();
+		$('#topic').show();
+
+		console.log(title, comments);
 	}
 }

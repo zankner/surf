@@ -19,46 +19,82 @@ chrome.storage.sync.get((results) => {
 		const uid = results['uid'];
 		const email = results['email'];
 
-		currentUser = new User(uid, displayName, email)
+		currentUser = new User(uid, displayName, email);
 	}
 });
 
-// Listen for message submission
+// Listen for message send
 $('#sendMessage').submit((e) => {
 	e.preventDefault();
 
+	const input = $('#sendMessage [name="message"]');
 	const date = new Date();
-	const message = new Message(currentUser.uid, currentUser.displayName, $('#sendMessage [name="message"]').val(), date.getTime());
+	const message = new Message(currentUser.uid, currentUser.displayName, input.val(), date.getTime());
 
 	chrome.tabs.getSelected((tab) => {
-		DatabaseService.addMessage(message, new URL(tab.url))
+		DatabaseService.addMessage(message, new URL(tab.url));
 	});
 
-	$('#sendMessage input').val('');
+	input.val('');
 });
 
-// Listen for messages
+// Listen for topic creation
+$('#createTopic').submit((e) => {
+	e.preventDefault();
+
+	const input = $('#createTopic [name="title"]');
+	const date = new Date();
+	const topic = new Topic(currentUser.uid, currentUser.displayName, input.val(), date.getTime());
+
+	chrome.tabs.getSelected((tab) => {
+		DatabaseService.addTopic(topic, new URL(tab.url));
+	});
+
+	input.val('');
+});
+
+// Listen for new messages and topics
 chrome.tabs.getSelected((tab) => {
-	DatabaseService.getMessageStream(new URL(tab.url), (snapshot) => {
+	const url = new URL(tab.url);
+
+	DatabaseService.getMessageStream(url, (snapshot) => {
 		const message = snapshot.val();
-		HTMLService.addMessage(message.displayName, message.content)
-	})
+		HTMLService.addMessage(message.displayName, message.content);
+	});
+
+	DatabaseService.getTopicStream(url, (snapshot) => {
+		const topic = snapshot.val();
+		HTMLService.addTopic(topic.id, topic.title);
+	});
 });
 
 // Log out
-$('#logoutLink').click(() => {
-	firebase.auth().signOut().then(function() {
+$('#logoutLink').on('click', () => {
+	firebase.auth().signOut().then(function () {
 		window.location.href = 'login.html';
 		chrome.browserAction.setPopup({
 			popup: 'login.html'
-		})
-	})
+		});
+	});
 });
 
-$('#homeLink').click(() => {
-	HTMLService.showChat()
+// Show chat
+$('#homeLink').on('click', () => {
+	HTMLService.showChat();
 });
 
-$('#forumsLink').click(() => {
-	HTMLService.showTopics()
+// Show topics
+$('#topicsLink').on('click', () => {
+	HTMLService.showTopics();
+});
+
+// Show topic
+$('#topicsContainer').on('click', '*', (e) => {
+	const topicId = e.target.id;
+	chrome.tabs.getSelected((tab) => {
+		DatabaseService.getTopic(new URL(tab.url), topicId, (snapshot) => {
+			const topic = snapshot.val();
+			HTMLService.displayTopic(topic.title, topic.comments);
+		});
+	});
 });
