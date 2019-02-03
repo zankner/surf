@@ -1,13 +1,13 @@
 class HTMLService {
-	static addMessage(displayName, message) {
+	static addMessage(displayName, content) {
 		const messageContainer = $('#messageContainer');
 		if ($('#messageContainer div h6:last').text() === displayName) {
-			const newMessageText = $('<p></p>').text(message);
+			const newMessageText = $('<p></p>').text(content);
 			$('#messageContainer div p:last').append(newMessageText);
 		} else {
 			const newMessageDiv = $('<div></div>').addClass('message-group');
 			newMessageDiv.append($('<h6></h6>').text(displayName));
-			newMessageDiv.append($('<p></p>').text(message));
+			newMessageDiv.append($('<p></p>').text(content));
 			messageContainer.append(newMessageDiv);
 		}
 
@@ -20,6 +20,13 @@ class HTMLService {
 		newTopicDiv.attr('id', id);
 		newTopicDiv.text(title);
 		topicsContainer.append(newTopicDiv)
+	}
+
+	static addComment(displayName, content) {
+		const newCommentDiv = $('<div></div>').addClass('comment-group');
+		newCommentDiv.append($('<h6></h6>').text(displayName));
+		newCommentDiv.append($('<p></p>').text(content));
+		$('#topicContainer').append(newCommentDiv);
 	}
 
 	static showChat() {
@@ -40,11 +47,13 @@ class HTMLService {
 		$('#topicsLink').addClass('active');
 	}
 
-	static displayTopic(title, comments) {
+	static displayTopic(title, topicId) {
 		$('#chat').hide();
 		$('#topics').hide();
 		$('#topic').show();
 
-		console.log(title, comments);
+		$('');
+		$('#topicTitle').text(title);
+
 	}
 }

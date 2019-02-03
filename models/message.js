@@ -1,6 +1,6 @@
 class Message {
 	constructor(uid, displayName, content, timestamp) {
-		this.id = timestamp.toString() + uid;
+		this.id = uid + '-' + timestamp.toString();
 		this.uid = uid;
 		this.displayName = displayName;
 		this.content = content;

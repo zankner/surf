@@ -1,6 +1,6 @@
 class Topic {
 	constructor(uid, displayName, title, timestamp) {
-		this.id = uid + timestamp.toString();
+		this.id = uid + '-' + timestamp.toString();
 		this.uid = uid;
 		this.displayName = displayName;
 		this.title = title;

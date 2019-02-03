@@ -53,6 +53,24 @@ $('#createTopic').submit((e) => {
 	input.val('');
 });
 
+// Listen for comment write
+$('#sendComment').submit((e) => {
+	e.preventDefault();
+
+	const input = $('#sendComment [name="comment"]');
+	const date = new Date();
+	const comment = new Message(currentUser.uid, currentUser.displayName, input.val(), date.getTime());
+
+	chrome.tabs.getSelected((tab) => {
+		DatabaseService.addComment(comment, new URL(tab.url), currentTopic.id);
+	});
+
+	input.val('');
+});
+
+// Set current topic
+let currentTopic;
+
 // Listen for new messages and topics
 chrome.tabs.getSelected((tab) => {
 	const url = new URL(tab.url);
@@ -92,9 +110,19 @@ $('#topicsLink').on('click', () => {
 $('#topicsContainer').on('click', '*', (e) => {
 	const topicId = e.target.id;
 	chrome.tabs.getSelected((tab) => {
-		DatabaseService.getTopic(new URL(tab.url), topicId, (snapshot) => {
+		const url = new URL(tab.url);
+
+		if (currentTopic)
+			DatabaseService.stopCommentStream(url, currentTopic.id);
+
+		DatabaseService.getTopic(url, topicId, (snapshot) => {
 			const topic = snapshot.val();
-			HTMLService.displayTopic(topic.title, topic.comments);
+			currentTopic = topic;
+			HTMLService.displayTopic(topic.title);
+			DatabaseService.getCommentStream(url, topicId, (snapshot) => {
+				const comment = snapshot.val();
+				HTMLService.addComment(comment.displayName, comment.content);
+			});
 		});
 	});
 });

@@ -17,6 +17,15 @@ class DatabaseService {
 		ref.set(topic.serialize());
 	}
 
+	// Add comment
+	static addComment(comment, url, topicId) {
+		const encodedDomain = encodeURIComponent(url.hostname).replace(/\./g, '%2E');
+		const encodedPath = encodeURIComponent(url.pathname).replace(/\./g, '%2E');
+		const ref = firebase.database().ref('domains/' + encodedDomain + '/pages/' + encodedPath + '/topics/' + topicId + '/comments/' + comment.id);
+
+		ref.set(comment.serialize());
+	}
+
 	// Listen to a conversation
 	static getMessageStream(url, callback) {
 		const encodedDomain = encodeURIComponent(url.hostname).replace(/\./g, '%2E');
@@ -24,6 +33,23 @@ class DatabaseService {
 		const ref = firebase.database().ref('domains/' + encodedDomain + '/pages/' + encodedPath + '/messages');
 
 		ref.on('child_added', callback);
+	}
+
+	// Get a comment stream
+	static getCommentStream(url, topicId, callback) {
+		const encodedDomain = encodeURIComponent(url.hostname).replace(/\./g, '%2E');
+		const encodedPath = encodeURIComponent(url.pathname).replace(/\./g, '%2E');
+		const ref = firebase.database().ref('domains/' + encodedDomain + '/pages/' + encodedPath + '/topics/' + topicId + '/comments');
+
+		ref.on('child_added', callback);
+	}
+
+	static stopCommentStream(url, topicId) {
+		const encodedDomain = encodeURIComponent(url.hostname).replace(/\./g, '%2E');
+		const encodedPath = encodeURIComponent(url.pathname).replace(/\./g, '%2E');
+		const ref = firebase.database().ref('domains/' + encodedDomain + '/pages/' + encodedPath + '/topics/' + topicId + '/comments');
+
+		ref.off('child_added');
 	}
 
 	// Get all the topics
@@ -36,24 +62,12 @@ class DatabaseService {
 	}
 
 	// Get specific topic
-	static getTopic(url, id, callback) {
+	static getTopic(url, topicId, callback) {
 		const encodedDomain = encodeURIComponent(url.hostname).replace(/\./g, '%2E');
 		const encodedPath = encodeURIComponent(url.pathname).replace(/\./g, '%2E');
-		const ref = firebase.database().ref('domains/' + encodedDomain + '/pages/' + encodedPath + '/topics/' + id);
+		const ref = firebase.database().ref('domains/' + encodedDomain + '/pages/' + encodedPath + '/topics/' + topicId);
 
 		ref.once('value', callback);
-	}
-
-	// Add a user to the database
-	static addUser(user) {
-		const ref = firebase.database().ref('users/' + user.uid);
-		ref.set(user.serialize());
-	}
-
-	// Add a comment to a forum topic
-	static addComment(forumComment) {
-		const ref = firebase.database().ref('domains/' + forumComment.domainId + '/pages/' + forumComment.pageId + '/forums/' + forumComment.forumId + '/comments/' + forumComment.id);
-		ref.set(forumComment.serialize());
 	}
 
 	// Search for a certain forum thread
