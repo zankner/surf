@@ -2,19 +2,15 @@ body {
 	width: 500px;
 }
 
-:focus {outline: none !important;
-
-	outline-color: transparent;
-	outline-style: none;}
-
 .message-container {
 	padding-left: 5px;
 	margin: 10px;
 	height: 300px;
 }
 
-.forums-list-container-container {
+.topics-container {
 	height: 300px;
+	margin: 10px;
 }
 
 .forum-container {

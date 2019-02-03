@@ -8,6 +8,9 @@ firebase.initializeApp({
 	messagingSenderId: '903716384912'
 });
 
+// Show chat and hide other sections
+HTMLService.showChat();
+
 // Set name on page load
 let currentUser;
 chrome.storage.sync.get((results) => {
@@ -43,11 +46,19 @@ chrome.tabs.getSelected((tab) => {
 });
 
 // Log out
-$('#logout').click(() => {
+$('#logoutLink').click(() => {
 	firebase.auth().signOut().then(function() {
 		window.location.href = 'login.html';
 		chrome.browserAction.setPopup({
 			popup: 'login.html'
 		})
 	})
+});
+
+$('#homeLink').click(() => {
+	HTMLService.showChat()
+});
+
+$('#forumsLink').click(() => {
+	HTMLService.showTopics()
 });

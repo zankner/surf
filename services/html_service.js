@@ -15,8 +15,27 @@ class HTMLService {
 	}
 
 	static addTopic(id, title) {
-		// Format for topics:
-		// <a href="#" class="list-group-item list-group-item-action">Title</a>
-		// Must be added as a child of #forumsListContainer
+		const topicsContainer = $('#forumsContainer');
+		const newTopicDiv = $('<a href="#"></a>').addClass('list-group-item list-group-item-action')
+		topicsContainer.append(newTopicDiv)
+	}
+
+	static showChat() {
+		$('#chat').show();
+		$('#topics').hide();
+		$('#forum').hide();
+
+		$('#homeLink').addClass('active');
+		$('#forumsLink').removeClass('active')
+
+	}
+
+	static showTopics() {
+		$('#chat').hide();
+		$('#topics').show();
+		$('#forum').hide();
+
+		$('#homeLink').removeClass('active');
+		$('#forumsLink').addClass('active')
 	}
 }

@@ -24,9 +24,9 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
-					<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-					<a class="nav-item nav-link" href="#">Forums</a>
-					<a class="nav-item nav-link" href="#" id="logout">Logout</a>
+					<a class="nav-item nav-link active" href="#" id="homeLink">Home</a>
+					<a class="nav-item nav-link" href="#" id="forumsLink">Forums</a>
+					<a class="nav-item nav-link" href="#" id="logoutLink">Logout</a>
 				</div>
 			</div>
 		</nav>
@@ -45,8 +45,8 @@
 		</div>
 
 		<!--Forums list-->
-		<div id="forumsList" hidden>
-			<div id="forumsListContainer" class="pre-scrollable list-group forums-list-container"></div>
+		<div id="topics">
+			<div id="topicsContainer" class="pre-scrollable list-group topics-container"></div>
 			<form id="createForum" method="post" autocomplete="off" class="create-forum">
 				<div class="input-group">
 					<input type="text" name="title" class="form-control" placeholder="What's interesting?">
@@ -58,7 +58,7 @@
 		</div>
 
 		<!--Forum-->
-		<div id="forum" hidden>
+		<div id="forum">
 			<div id="forumContainer" class="pre-scrollable border-left forum-container"></div>
 			<form id="sendComment" method="post" autocomplete="off" class="send-comment">
 				<div class="input-group">
