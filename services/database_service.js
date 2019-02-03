@@ -29,6 +29,12 @@ class DatabaseService {
 		ref.on('child_added', callback)
 	}
 
+	//Add a user to the database
+	static addUser(user){
+		const ref = firebase.database().ref('users/' + user.uid);
+		ref.set(user.serialize());
+	}
+
 	// Send friend request
 	static friendRequest(sendingUserId, receivingUserId){
     const sendingRef = firebase.database().ref('users/' + sendingUserId + '/friends/' + receivingUserId);
@@ -54,9 +60,9 @@ class DatabaseService {
   }
 
 	//Generate a report
-  static addReport(reportClass, reportId){
-		const reportRef = firebase.database().ref('reports/' + reportId);
-    reportRef.set(reportClass.serialize());
+  static addReport(report){
+		const reportRef = firebase.database().ref('reports/' + report.id);
+    reportRef.set(report.serialize());
 	}
 
 	//Get all of the reports
@@ -68,14 +74,14 @@ class DatabaseService {
   }
 
 	//Form a forum topic
-  static addTopic(forumTopic, pageId, domainId, forumId){
-    const ref = firebase.database().ref('domains/' + domainId + '/pages/' + pageId + '/forums/' + forumId + '/topic');
+  static addTopic(forumTopic){
+    const ref = firebase.database().ref('domains/' + forumTopic.domainId + '/pages/' + forumTopic.pageId + '/forums/' + forumTopic.id + '/topic');
     ref.set(forumTopic.serialize());
   }
 
 	//Add a comment to a forum topic
-  static addComment(forumComment, pageId, domainId, forumId, commentId){
-    const ref = firebase.database().ref('domains/' + domainId + '/pages/' + pageId + '/forums/' + forumId + '/comments/' + commentId);
+  static addComment(forumComment){
+    const ref = firebase.database().ref('domains/' + forumComment.domainId + '/pages/' + forumComment.pageId + '/forums/' + forumComment.forumId + '/comments/' + forumComment.id);
     ref.set(forumComment.serialize());
   }
 

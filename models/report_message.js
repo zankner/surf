@@ -1,17 +1,19 @@
 class ReportMessage{
 
-  constructor(data){
+  constructor(sender, timestamp, reportContent, reportType, reported){
+    this.id = sender + timestamp.toString();
     this.reportContent = data.reportContent;
     this.reportType = data.reportType;
-    this.creator = data.creator;
+    this.sender = data.sender;
     this.reported = data.reported;
   }
 
   serialize(){
     return {
+      id: this.id,
       reportContent: this.reportContent,
       reportType: this.reportType,
-      creator: this.creator,
+      sender: this.sender,
       reported: this.reported
     }
   }

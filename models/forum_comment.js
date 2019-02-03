@@ -1,8 +1,12 @@
 class ForumComment{
 
-  constructor(data){
-    this.creator = data.creator;
+  constructor(sender, content, timestamp, pageId, domainId, forumId){
+    this.id = sender + timestamp.toString();
+    this.sender = data.sender;
     this.content = data.content;
+    this.pageId = data.pageId;
+    this.domainId = data.domainId;
+    this.forumId = data.forumId;
     this.totalVotes = 0;
     this.upvotes = 0;
     this.downvotes = 0;
@@ -10,7 +14,8 @@ class ForumComment{
 
   serialize(){
     return {
-      creator: this.creator,
+      id: this.id,
+      sender: this.sender,
       content: this.content,
       totalVotes: this.totalVotes,
       upvotes: this.upvotes,
