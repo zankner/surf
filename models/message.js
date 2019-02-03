@@ -1,6 +1,5 @@
 class Message {
 	constructor(sender, content, timestamp) {
-		console.log(sender);
 		this.id = sender + timestamp.toString();
 		this.timestamp = timestamp;
 		this.sender = sender;

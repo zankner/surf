@@ -25,4 +25,14 @@ $('#sendMessage').submit((e) => {
 	chrome.tabs.getSelected((tab) => {
 		Database.addMessage(message, new URL(tab.url))
 	});
+
+	$('#sendMessage input').val('');
+});
+
+// Listen for messages
+chrome.tabs.getSelected((tab) => {
+	Database.getMessageStream(new URL(tab.url), (snapshot) => {
+		const message = snapshot.val();
+		HTMLActuator.addMessage(message.sender, message.content)
+	})
 });
