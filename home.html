@@ -29,37 +29,6 @@
 		</nav>
 
 		<div id="messageContainer" class="pre-scrollable border-left message-container">
-			<div class="message-group">
-				<h6>ben</h6>
-				<p>Hello, Zack!</p>
-			</div>
-			<!--<div class="message-group">-->
-				<!--<h6>George</h6>-->
-				<!--<p>Hello, Ben</p>-->
-				<!--<p>I hope your evening is going well. I'm writing to let you know that I don't like you at all.</p>-->
-			<!--</div>-->
-			<!--<div class="message-group">-->
-				<!--<h6>Ben</h6>-->
-				<!--<p>Well I'll tell you this much, that's a damn shame.</p>-->
-				<!--<p>I mean, I don't know what I did wrong!</p>-->
-				<!--<p>I worked so hard.</p>-->
-				<!--<p>Can you give me a reason?</p>-->
-			<!--</div>-->
-			<!--<div class="message-group">-->
-				<!--<h6>George</h6>-->
-				<!--<p>Not at the moment, no.</p>-->
-				<!--<p>All I have to say is fuck you and everyone who looks like you.</p>-->
-			<!--</div>-->
-			<!--<div class="message-group">-->
-				<!--<h6>Ben</h6>-->
-				<!--<p>Ok, fine then.</p>-->
-				<!--<p>I'm gonna go make some goddamn guacamole.</p>-->
-				<!--<p>Later bro.</p>-->
-			<!--</div>-->
-			<!--<div class="message-group">-->
-				<!--<h6>Zack</h6>-->
-				<!--<p>Bye</p>-->
-			<!--</div>-->
 		</div>
 		<form id="sendMessage" method="post" autocomplete="off" class="send-message">
 			<div class='input-group'>
@@ -71,7 +40,9 @@
 		</form>
 
 		<script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
-		<script src="scripts/html_actuator.js"></script>
+		<script src="models/message.js"></script>
+		<script src="services/html_actuator.js"></script>
+		<script src="services/database.js"></script>
 		<script src="scripts/home.js"></script>
 	</body>
 </html>
