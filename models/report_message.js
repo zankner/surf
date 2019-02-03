@@ -1,5 +1,4 @@
 class ReportMessage {
-
 	constructor(sender, timestamp, reportContent, reportType, reported) {
 		this.id = sender + timestamp.toString();
 		this.reportContent = data.reportContent;
