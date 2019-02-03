@@ -9,10 +9,14 @@ firebase.initializeApp({
 });
 
 // Set name on page load
-let name;
+let currentUser;
 chrome.storage.sync.get((results) => {
-	if (results['name']) {
-		name = results['name'];
+	if (results['displayName'] && results['uid'] && results['email']) {
+		const displayName = results['displayName'];
+		const uid = results['uid'];
+		const email = results['email'];
+
+		currentUser = new User(uid, displayName, email)
 	}
 });
 
@@ -20,13 +24,8 @@ chrome.storage.sync.get((results) => {
 $('#sendMessage').submit((e) => {
 	e.preventDefault();
 
-	if (!name) {
-		alert('You must set a name before you can send a message.');
-		return
-	}
-
 	const date = new Date();
-	const message = new Message(name, $('#sendMessage [name="message"]').val(), date.getTime());
+	const message = new Message(currentUser.uid, currentUser.displayName, $('#sendMessage [name="message"]').val(), date.getTime());
 
 	chrome.tabs.getSelected((tab) => {
 		DatabaseService.addMessage(message, new URL(tab.url))
@@ -39,7 +38,7 @@ $('#sendMessage').submit((e) => {
 chrome.tabs.getSelected((tab) => {
 	DatabaseService.getMessageStream(new URL(tab.url), (snapshot) => {
 		const message = snapshot.val();
-		HTMLService.addMessage(message.sender, message.content)
+		HTMLService.addMessage(message.displayName, message.content)
 	})
 });
 
