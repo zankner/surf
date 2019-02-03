@@ -89,4 +89,16 @@ class Database {
     })
   }
 
+  //Form a forum topic
+  static addTopic(focus, content, topic, pageId, domainId, forumId, forumTitle){
+    console.log('yeet')
+    const ref = firebase.database().ref('domains/' + domainId + '/chats/' + pageId + '/forum/' + forumId)
+    ref.set({
+      focus: focus,
+      content: content,
+      topic: topic,
+      forumTitle: forumTitle
+    });
+  }
+
  }
