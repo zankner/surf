@@ -91,8 +91,29 @@ class Database {
 
   //Form a forum topic
   static addTopic(forumTopic, pageId, domainId, forumId){
-    const ref = firebase.database().ref('domains/' + domainId + '/chats/' + pageId + '/forum/' + forumId)
-    ref.set(forumTopic);
+    const ref = firebase.database().ref('domains/' + domainId + '/chats/' + pageId + '/forum/' + forumId + '/topic');
+    ref.set(forumTopic.serialize());
+  }
+
+  //Add a comment to a forum topic
+  static addComment(forumComment, pageId, domainId, forumId, commentId){
+    const ref = firebase.database().ref('domains/' + domainId + '/chats/' + pageId + '/forum/' + forumId + '/comments/' + commentId);
+    ref.set(forumComment.serialize());
+  }
+
+  //Vote on a forum comment
+  static vote(vote, pageId, domainId, forumId, commentId){
+    const ref = firebase.database().ref('domains/' + domainId + '/chats/' + pageId + '/forum/' + forumId + '/comments/' + commentId + '/votes');
+    ref.on('value', function(snapshot) {
+      console.log(snapshot.val(), 'hello')
+      if(vote=='upvote'){
+        ref.child('upvotes').set(snapshot.val().upvotes +=1);
+      }
+      else{
+        ref.child('downvotes').set(snapshot.val().downvotes +=1);
+      }
+      ref.child(totalVotes).set(snapshot.val().totalVotes += 1);
+    })
   }
 
  }
