@@ -89,10 +89,10 @@ chrome.tabs.getSelected((tab) => {
 // Log out
 $('#logoutLink').on('click', () => {
 	firebase.auth().signOut().then(function () {
-		window.location.href = 'login.html';
 		chrome.browserAction.setPopup({
 			popup: 'login.html'
 		});
+		window.close();
 	});
 });
 

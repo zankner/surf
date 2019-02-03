@@ -1,9 +1,6 @@
 * {
+	margin: 0;
 	outline: none !important;
-}
-
-body {
-	width: 500px;
 }
 
 .message-container, .topic-container {
