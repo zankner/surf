@@ -85,6 +85,18 @@ class DatabaseService {
 		ref.set(forumComment.serialize());
 	}
 
+	// Get all the forum topics
+	static getTopics(domainId, pageId, callback){
+		const ref = firebase.database().ref('domains/' + domainId + '/pages/' + pageId + '/forums')
+		ref.once('value').then(function(snapshot){
+			let topics = [];
+			snapshot.forEach(function (childSnapshot){
+				topics.push(childSnapshot.val().topic)
+			});
+			callback(topics)
+		});
+	}
+
 	// Vote on a forum comment
 	static vote(vote, pageId, domainId, forumId, commentId) {
 		const ref = firebase.database().ref('domains/' + domainId + '/pages/' + pageId + '/forums/' + forumId + '/comments/' + commentId);
