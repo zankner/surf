@@ -10,19 +10,21 @@ firebase.initializeApp({
 
 const provider = new firebase.auth.GoogleAuthProvider();
 
-firebase.auth().signInWithPopup(provider).then(function (result) {
-	const user = result.user;
+$('#login').click(() => {
+	firebase.auth().signInWithPopup(provider).then(function(result) {
+		const token = result.credential.accessToken;
+		const user = result.user;
 
-	chrome.storage.sync.set({
-		displayName: user.displayName,
-		uid: user.uid,
-		email: user.email
-	});
+		chrome.storage.sync.set({
+			displayName: user.displayName,
+			uid: user.uid,
+			email: user.email
+		});
 
-	window.location.href = 'home.html';
-	chrome.browserAction.setPopup({
-		popup: 'home.html'
+		chrome.browserAction.setPopup({
+			popup: 'home.html'
+		});
+
+		window.location.href = 'home.html';
 	});
-}).catch(() => {
-	window.close();
 });

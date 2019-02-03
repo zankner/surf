@@ -92,7 +92,6 @@ $('#logoutLink').on('click', () => {
 		chrome.browserAction.setPopup({
 			popup: 'login.html'
 		});
-		window.close();
 	});
 });
 
